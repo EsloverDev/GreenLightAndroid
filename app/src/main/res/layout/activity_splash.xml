@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:src="@drawable/savefreepik"
         android:layout_width="130dp"
         android:layout_height="144dp"
         android:layout_alignParentStart="true"
@@ -14,8 +15,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="140dp"
         android:layout_marginTop="165dp"
-        android:layout_marginEnd="140dp"
-        android:src="@drawable/savefreepik" />
+        android:layout_marginEnd="140dp" />
 
     <TextView
         android:id="@+id/textView"

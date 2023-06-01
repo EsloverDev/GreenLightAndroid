@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GreenLightProject</string>
+    <string name="usuario_ingreso">Escribe tu usuario</string>
 </resources>
