@@ -12,8 +12,17 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.greenlightproject.R;
+import com.example.greenlightproject.interfaces.PerfilApi;
+import com.example.greenlightproject.modelo.Perfil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         //Aquí se referencia el EditText y el Button con sus correspondientes en el layout activity_main.xml por
         //medio del id.
         edUsuario = findViewById(R.id.usuarioInicio);
+        edContrasena = findViewById(R.id.passwordId);
         btIniciar = findViewById(R.id.btnIniciar);
+        btRegistro = findViewById(R.id.btnRegistro);
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
@@ -45,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        btRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registrarPerfil();
+            }
+        });
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev){
@@ -53,5 +71,31 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 8);
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    public void registrarPerfil(){
+        String username = edUsuario.getText().toString();
+        String password = edContrasena.getText().toString();
+
+        Perfil p = new Perfil(username, password);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.20.21:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+
+        PerfilApi perfilApi = retrofit.create(PerfilApi.class);
+        Call<Perfil> call = perfilApi.registrarDatos(p);
+
+        call.enqueue(new Callback<Perfil>() {
+
+            @Override
+            public void onResponse(Call<Perfil> call, Response<Perfil> response) {
+                Toast.makeText(MainActivity.this, "Registrado", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Perfil> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
     }
 }
