@@ -14,20 +14,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.greenlightproject.MainMenu;
 import com.example.greenlightproject.R;
-import com.example.greenlightproject.interfaces.PerfilApi;
+
 import com.example.greenlightproject.modelo.Perfil;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText edUsuario, edContrasena;
-    private Button btIniciar, btRegistro;
+    private EditText edCorreo, edContrasena;
+    private Button btInicio, btRegistro;
     private ActionBar actionBar;
 
     @Override
@@ -37,32 +34,31 @@ public class MainActivity extends AppCompatActivity {
 
         //Aquí se referencia el EditText y el Button con sus correspondientes en el layout activity_main.xml por
         //medio del id.
-        edUsuario = findViewById(R.id.usuarioInicio);
-        edContrasena = findViewById(R.id.passwordId);
-        btIniciar = findViewById(R.id.btnIniciar);
-        btRegistro = findViewById(R.id.btnRegistro);
+        edCorreo = findViewById(R.id.correoInicio);
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.mipmap.savefreepik);
 
-        btIniciar.setOnClickListener(new View.OnClickListener() {
+        btInicio = findViewById(R.id.btnIniciar);
+
+        btInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(MainActivity.this, UbicacionesActivity.class);
+                Intent mainIntent = new Intent(MainActivity.this, MainMenu.class);
                 //Esta línea permite capturar el dato que se escriba como usuario para pasarlo a la siguiente actividad
-                mainIntent.putExtra("nombre", edUsuario.getText().toString());
+                mainIntent.putExtra("nombre", edCorreo.getText().toString());
                 startActivity(mainIntent);
             }
         });
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        btRegistro.setOnClickListener(new View.OnClickListener() {
+        /*btRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registrarPerfil();
             }
-        });
+        });*/
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev){
@@ -73,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
-    public void registrarPerfil(){
+    /*public void registrarPerfil(){
         String username = edUsuario.getText().toString();
         String password = edContrasena.getText().toString();
 
@@ -97,5 +93,5 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-    }
+    }*/
 }
