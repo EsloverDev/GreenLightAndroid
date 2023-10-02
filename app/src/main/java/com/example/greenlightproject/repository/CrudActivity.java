@@ -17,12 +17,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.example.greenlightproject.R;
+import com.example.greenlightproject.presentacion.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -34,25 +36,33 @@ public class CrudActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private Button btnCrear, btnBuscar, btnModificar, btnEliminar, btnListar;
 
+    AdminSQLiteOpenHelper dbHelper = new AdminSQLiteOpenHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crud);
 
-        btnCrear = findViewById(R.id.btnRegProd);
+
+        btnCrear = findViewById(R.id.btnRegUsu);
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Agregado exitosamente", Snackbar.LENGTH_LONG)
-                        .setActionTextColor(getResources().getColor(R.color.greenwood))
-                        .setAction("Deshacer", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                showNotification("GreenLight",
-                                        "Quieres agregar un perfil diferente?");
-                            }
-                        })
-                        .show();
+                dbHelper.getWritableDatabase();
+// Llamar al método para ingresar los registros y obtener los valores ingresados por el usuario desde EditText.
+                dbHelper.insertarReg(String.valueOf(et_nombre.getText().toString()),
+                        String.valueOf(et_password.getText().toString()),
+                        String.valueOf(et_email.getText().toString()),
+                        String.valueOf(et_telefono.getText().toString()),
+                        String.valueOf(et_pais.getText().toString()),
+                        String.valueOf(et_ciudad.getText().toString()),
+                        String.valueOf(et_localidad.getText().toString()),
+                        String.valueOf(et_documento.getText().toString()));
+
+                dbHelper.close();
+                Toast.makeText(getApplicationContext(), "Usuario agregado exitosamente", Toast.LENGTH_LONG).show();
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
             }
         });
 
@@ -104,75 +114,8 @@ public class CrudActivity extends AppCompatActivity {
         mNotificationManager.notify(0, mBuilder.build());
     }
 
-    List<String> conectToSQL() {
 
-        List<String> array = new ArrayList<>();
 
-        AdminSQLiteOpenHelper dbHelper = new AdminSQLiteOpenHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        String nombre = et_nombre.getText().toString();
-        String password = et_password.getText().toString();
-        String email = et_email.getText().toString();
-        String telefono = et_telefono.getText().toString();
-        String pais = et_pais.getText().toString();
-        String ciudad = et_ciudad.getText().toString();
-        String localidad = et_localidad.getText().toString();
-        String documento = et_documento.getText().toString();
-
-        if (!nombre.isEmpty() && !password.isEmpty() && !email.isEmpty() && !telefono.isEmpty() && !pais.isEmpty() && !ciudad.isEmpty() && !localidad.isEmpty() && !documento.isEmpty()) {
-            ContentValues registro = new ContentValues();
-
-            registro.put("nombre", nombre);
-            registro.put("password", password);
-            registro.put("email", email);
-            registro.put("telefono", telefono);
-            registro.put("pais", pais);
-            registro.put("ciudad", ciudad);
-            registro.put("localidad", localidad);
-            registro.put("documento", documento);
-
-            db.insert("perfiles", null, registro);
-            db.close();
-
-            et_nombre.setText("");
-            et_password.setText("");
-            et_email.setText("");
-            et_telefono.setText("");
-            et_pais.setText("");
-            et_ciudad.setText("");
-            et_localidad.setText("");
-            et_documento.setText("");
-
-            SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
-            Cursor c = dbRead.rawQuery("SELECT nombre, password, email, telefono, pais, ciudad, localidad, documento FROM perfiles", null);
-
-            if (c.moveToFirst()) {
-                do {
-                    String column1 = c.getString(0);
-                    String column2 = c.getString(1);
-                    String column3 = c.getString(2);
-                    String column4 = c.getString(3);
-                    String column5 = c.getString(4);
-                    String column6 = c.getString(5);
-                    String column7 = c.getString(6);
-                    String column8 = c.getString(7);
-                    array.add(column1);
-                    array.add(column2);
-                    array.add(column3);
-                    array.add(column4);
-                    array.add(column5);
-                    array.add(column6);
-                    array.add(column7);
-                    array.add(column8);
-                    System.out.println("paso producto: " + column1);
-                } while (c.moveToNext());
-            }
-            c.close();
-            dbRead.close();
-        }
-        return array;
-    }
 
     private void setListData(List<String> your_array_List) {
         ListView lv = (ListView) findViewById(R.id.listViewData);

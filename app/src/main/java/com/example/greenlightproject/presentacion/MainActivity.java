@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,8 +19,8 @@ import android.widget.Toast;
 import com.example.greenlightproject.MainMenu;
 import com.example.greenlightproject.R;
 
-import com.example.greenlightproject.modelo.Perfil;
-
+import com.example.greenlightproject.repository.AdminSQLiteOpenHelper;
+import com.example.greenlightproject.repository.CrudActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText edCorreo, edContrasena;
     private Button btInicio, btRegistro;
     private ActionBar actionBar;
+
+    AdminSQLiteOpenHelper dbHelper = new AdminSQLiteOpenHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,30 +39,49 @@ public class MainActivity extends AppCompatActivity {
         //Aquí se referencia el EditText y el Button con sus correspondientes en el layout activity_main.xml por
         //medio del id.
         edCorreo = findViewById(R.id.correoInicio);
+        edContrasena = findViewById(R.id.contrasenaInicio);
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.mipmap.savefreepik);
 
         btInicio = findViewById(R.id.btnIniciar);
+        btRegistro = findViewById(R.id.btnRegistrar);
 
         btInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(MainActivity.this, MainMenu.class);
-                //Esta línea permite capturar el dato que se escriba como usuario para pasarlo a la siguiente actividad
-                mainIntent.putExtra("nombre", edCorreo.getText().toString());
-                startActivity(mainIntent);
+
+                try {
+                    Cursor cursor = dbHelper.consultarUsuPas(edCorreo.getText().toString(), edContrasena.getText().toString());
+                    if (cursor.getCount() > 0) {
+                        Intent mainIntent = new Intent(MainActivity.this, MainMenu.class);
+                        //Esta línea permite capturar el dato que se escriba como usuario para pasarlo a la siguiente actividad
+                        mainIntent.putExtra("nombre", edCorreo.getText().toString());
+                        startActivity(mainIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Correo y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                    }
+                    edCorreo.setText("");
+                    edContrasena.setText("");
+                    edCorreo.findFocus();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                }
+
+
+
             }
         });
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        /*btRegistro.setOnClickListener(new View.OnClickListener() {
+        btRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrarPerfil();
+                Intent i = new Intent(getApplicationContext(), CrudActivity.class);
+                startActivity(i);
             }
-        });*/
+        });
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev){
@@ -68,30 +91,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.dispatchTouchEvent(ev);
     }
-
-    /*public void registrarPerfil(){
-        String username = edUsuario.getText().toString();
-        String password = edContrasena.getText().toString();
-
-        Perfil p = new Perfil(username, password);
-
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.20.21:8080/").addConverterFactory(GsonConverterFactory.create()).build();
-
-        PerfilApi perfilApi = retrofit.create(PerfilApi.class);
-        Call<Perfil> call = perfilApi.registrarDatos(p);
-
-        call.enqueue(new Callback<Perfil>() {
-
-            @Override
-            public void onResponse(Call<Perfil> call, Response<Perfil> response) {
-                Toast.makeText(MainActivity.this, "Registrado", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<Perfil> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                t.printStackTrace();
-            }
-        });
-    }*/
 }
