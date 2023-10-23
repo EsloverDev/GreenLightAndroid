@@ -10,12 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.greenlightproject.databinding.ActivityMainMenuBinding;
 import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
@@ -24,8 +21,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.greenlightproject.repository.CrudActivity;
 import com.example.greenlightproject.presentacion.ListarActivity;
 import com.example.greenlightproject.presentacion.UbicacionesActivity;
 
@@ -33,8 +28,10 @@ public class MainMenu extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainMenuBinding binding;
+
     private TextView txtEntrada;
-    private Button btnFavoritos;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +50,16 @@ public class MainMenu extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        //Pasando cada ID de menú como un conjunto de IDs porque cada menú debe ser considerado como
+        // destino de nivel superior.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_productos, R.id.nav_servicios, R.id.nav_sucursales, R.id.nav_info)
+                R.id.nav_perfil, R.id.nav_calendario, R.id.nav_sucursales, R.id.nav_info)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
 
     }
 
@@ -90,18 +88,10 @@ public class MainMenu extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.crud) {
 
-            Intent segundaPantalla = new Intent(this, CrudActivity.class);
-            startActivity(segundaPantalla);
-        }
         if (id == R.id.ubicacionesId) {
             Intent terceraPantalla = new Intent(this, UbicacionesActivity.class);
             startActivity(terceraPantalla);
-        }
-        if (id == R.id.listar) {
-            Intent cuartaPantalla = new Intent(this, ListarActivity.class);
-            startActivity(cuartaPantalla);
         }
 
         return super.onOptionsItemSelected(item);

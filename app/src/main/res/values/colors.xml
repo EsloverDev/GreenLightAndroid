@@ -18,5 +18,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="amarillo">#F5D10D</color>
-    <color name="greenwood">#588157</color>
+    <color name="Alabaster">#edede9</color>
+    <color name="BlueStone">#457b9d</color>
+    <color name="SageGreen">#588157</color>
 </resources>

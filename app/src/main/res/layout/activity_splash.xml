@@ -48,5 +48,5 @@
         android:layout_marginTop="85dp"
         android:layout_marginEnd="66dp"
         android:layout_marginBottom="715dp"
-        android:progressDrawable="@color/greenwood" />
+        android:progressDrawable="@color/SageGreen" />
 </RelativeLayout>

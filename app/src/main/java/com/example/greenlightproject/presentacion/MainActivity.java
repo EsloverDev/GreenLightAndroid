@@ -2,7 +2,6 @@ package com.example.greenlightproject.presentacion;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,10 +14,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.greenlightproject.MainMenu;
 import com.example.greenlightproject.R;
-
 import com.example.greenlightproject.repository.AdminSQLiteOpenHelper;
 import com.example.greenlightproject.repository.CrudActivity;
 
@@ -83,12 +80,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //este método se utiliza para ocultar el teclado cuando se toca en otra parte de la interfaz de usuario
+    //mientras un elemento tiene el enfoque
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev){
+        //Se comprueba que el enfoque actual (getCurrentFocus()) no es nulo. Para asegurarse de que hay un elemento
+        //de la interfaz de usuario que tiene el enfoque en ese momento.
         if (getCurrentFocus() != null){
+            //Se obtiene una instancia de InputMethodManager
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            //Se llama al método hideSoftInputFromWindow(). Este método se utiliza para ocultar el teclado de la
+            // ventana actual. Toma dos argumentos: el token de la ventana actual (getCurrentFocus().getWindowToken())
+            // y una bandera (en este caso, 8). La bandera 8 generalmente se utiliza para indicar que el teclado se
+            // ocultará de manera forzada.
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 8);
         }
+        //El método devuelve el resultado de super.dispatchTouchEvent(ev), que permite que el evento táctil
+        // continúe su procesamiento normal después de haber ocultado el teclado.
         return super.dispatchTouchEvent(ev);
     }
 }

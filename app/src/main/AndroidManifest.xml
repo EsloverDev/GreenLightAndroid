@@ -20,7 +20,12 @@
             android:exported="false" />
         <activity
             android:name=".presentacion.UbicacionesActivity"
-            android:exported="false" />
+            android:parentActivityName=".presentacion.MainActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentacion.MainActivity"/>
+        </activity>
         <activity
             android:name=".repository.CrudActivity"
             android:exported="false" />

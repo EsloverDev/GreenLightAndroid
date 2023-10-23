@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#457b9d"
+    android:background="@color/Alabaster"
     tools:context=".repository.CrudActivity">
 
     <ScrollView
@@ -34,83 +34,162 @@
                 android:textSize="34sp"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/textViewNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/nombre"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewNombre"
                 android:hint="@string/nombre_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/contraseña"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewContrasena"
                 android:hint="@string/contraseña_registro"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/correo"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewEmail"
                 android:hint="@string/correo_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/telefono"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_telefono"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewTelefono"
                 android:hint="@string/telefono_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewPais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/pais"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_pais"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewPais"
                 android:hint="@string/pais_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewCiudad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/ciudad"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_ciudad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewCiudad"
                 android:hint="@string/ciudad_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewLocalidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/localidad"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_localidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewLocalidad"
                 android:hint="@string/localidad_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewDocumento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/documento"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/txt_documento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:labelFor="@+id/textViewDocumento"
                 android:hint="@string/documento_hint"
                 android:inputType="text"
                 android:minHeight="48dp" />
@@ -120,10 +199,7 @@
                 android:layout_width="315dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-
                 android:text="@string/BotonRegistrar" />
-
-
         </LinearLayout>
     </ScrollView>
 

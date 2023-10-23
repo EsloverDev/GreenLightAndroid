@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="69dp"
         android:background="@drawable/banner"
-
         android:text="@string/menu_slideshow"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -41,6 +40,7 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
+                    android:src="@drawable/centro_de_acopio1"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -56,7 +56,6 @@
                         android:id="@+id/sucDescription1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/descSuc1"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -66,7 +65,6 @@
                         android:id="@+id/sucAddress1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/carrera_10_34_14"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -76,7 +74,6 @@
                         android:id="@+id/sucTitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/bogot_centro"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -86,7 +83,6 @@
                         android:id="@+id/sucPhone1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/tel_7252300"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -105,11 +101,12 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView11"
+                    android:id="@+id/imageView7"
+                    android:src="@drawable/centro_de_acopio2"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
-                     />
+                    />
 
                 <LinearLayout
                     android:layout_width="260dp"
@@ -121,7 +118,6 @@
                         android:id="@+id/sucDescription2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/descSuc2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -131,7 +127,6 @@
                         android:id="@+id/sucAddress2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/calle_22sur_78b_82"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -141,7 +136,6 @@
                         android:id="@+id/sucTitle2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/kennedy"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -151,7 +145,6 @@
                         android:id="@+id/sucPhone2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="@string/tel_6787606"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -172,6 +165,7 @@
                 <ImageView
                     android:id="@+id/imageView12"
                     android:layout_width="150dp"
+                    android:src="@drawable/centro_de_acopio3"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                      />
